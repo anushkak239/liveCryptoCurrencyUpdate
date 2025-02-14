@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import time
 
-def fetch_crypto_data():
+def fetch_data():
     url = "https://api.coingecko.com/api/v3/coins/markets"
     params = {
         "vs_currency": "usd",
@@ -18,7 +18,7 @@ def fetch_crypto_data():
         print("Failed to fetch data")
         return None
 
-data = fetch_crypto_data()
+data = fetch_data()
 
 top_5_by_market_cap = sorted(data, key=lambda x: x['market_cap'], reverse=True)[:5]
 
@@ -35,7 +35,7 @@ def write_to_excel(data):
 
 
 while True:
-    data = fetch_crypto_data()
+    data = fetch_data()
     if data:
         write_to_excel(data)
         print("Data updated in Excel sheet.")
